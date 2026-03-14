@@ -41,13 +41,11 @@ It scans a target IP, domain, or entire subnet — finds open ports, grabs servi
 
 ```
 ViperScan/
-├── main.py                  ← entry point, run this
+├── ViperScan.py                  ← entry point, run this
 ├── README.md
 ├── LICENSE
 ├── requirements.txt
-├── .gitignore
 └── Modules/
-    ├── __init__.py
     ├── Host_Discovery.py    ← Phase 1: port scanning
     ├── Banner_Scanner.py    ← Phase 2: banner grabbing & OS detection
     └── Report.py            ← Phase 3: HTML + TXT report generation
@@ -105,32 +103,32 @@ python main.py [--ip IP | --domain DOMAIN] [--mode MODE] [OPTIONS]
 
 **Scan a single IP**
 ```bash
-python main.py --ip 192.168.1.1
+python ViperScan.py --ip 192.168.1.1
 ```
 
 **Scan a domain**
 ```bash
-python main.py --domain example.com
+python ViperScan.py --domain example.com
 ```
 
 **Scan entire /24 subnet**
 ```bash
-python main.py --ip 192.168.1.1 --mode subnet --subnetmask 24
+python ViperScan.py --ip 192.168.1.1 --mode subnet --subnetmask 24
 ```
 
 **Scan a custom range (multi mode)**
 ```bash
-python main.py --ip 192.168.1.1 --mode multi --start 1 --end 50
+python ViperScan.py --ip 192.168.1.1 --mode multi --start 1 --end 50
 ```
 
 **Faster scan with lower timeout**
 ```bash
-python main.py --ip 192.168.1.1 --timeout 2
+python ViperScan.py --ip 192.168.1.1 --timeout 2
 ```
 
 **Regenerate report without rescanning**
 ```bash
-python main.py --report-only
+python ViperScan.py --report-only
 ```
 
 ---
@@ -190,10 +188,10 @@ ViperScan runs in 3 automatic phases:
 
 ```bash
 # Test your own machine (safest)
-python main.py --ip 127.0.0.1
+python ViperScan.py --ip 127.0.0.1
 
 # Test a public DNS server (always legal)
-python main.py --ip 8.8.8.8
+python ViperScan.py --ip 8.8.8.8
 
 # Test imports only
 python -c "from Modules.Host_Discovery import HostDiscovery; from Modules.Banner_Scanner import BannerScanner; from Modules.Report import Report; print('All OK')"
