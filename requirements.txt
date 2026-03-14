@@ -1,0 +1,13 @@
+# ViperScan has no external dependencies.
+# Everything used is part of the Python standard library:
+#
+#   socket      — TCP connections and DNS resolution
+#   json        — reading and writing scan result files
+#   threading   — parallel scanning (one thread per IP/host)
+#   argparse    — command-line argument parsing
+#   sys         — live progress bar output (sys.stdout.write)
+#   time        — progress bar refresh interval
+#   os          — folder creation and file path handling
+#   datetime    — timestamping report filenames
+#
+# Requirements: Python 3.7 or higher

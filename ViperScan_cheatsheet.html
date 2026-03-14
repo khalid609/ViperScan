@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ViperScan — Cheat Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange:      #e8630a;
+      --orange-dark: #c94f00;
+      --orange-lite: #fff3eb;
+      --orange-mid:  #fde4cc;
+      --bg:          #ffffff;
+      --bg2:         #f8f8f8;
+      --bg3:         #f2f2f2;
+      --border:      #e0e0e0;
+      --border-dark: #ccc;
+      --text:        #1a1a1a;
+      --muted:       #777;
+      --muted2:      #aaa;
+      --green:       #1e7e3e;
+      --green-bg:    #edfbf1;
+      --red:         #c0392b;
+      --red-bg:      #fff0ee;
+      --yellow:      #9a6700;
+      --yellow-bg:   #fff8e6;
+      --blue:        #1a5fa8;
+      --blue-bg:     #eef4fd;
+      --mono:        'Share Tech Mono', monospace;
+      --sans:        'Barlow', sans-serif;
+      --radius:      8px;
+      --shadow:      0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg2);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 60%, #ff9a50 100%);
+      padding: 38px 52px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "🐍";
+      position: absolute;
+      right: 52px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 7rem;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .hero-logo {
+      background: rgba(255,255,255,.18);
+      border: 2px solid rgba(255,255,255,.35);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1.5px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      font-weight: 400;
+      opacity: .75;
+      font-size: 1.6rem;
+      letter-spacing: 0;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      margin-left: 2px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .badge.v { background: rgba(255,255,255,.35); }
+    .hero-desc {
+      margin-top: 14px;
+      color: rgba(255,255,255,.8);
+      font-size: 0.9rem;
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════════ */
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 32px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .mb { margin-bottom: 22px; }
+
+    /* ══════════════════════════════════════════
+       SECTION TITLE
+    ══════════════════════════════════════════ */
+    .sec {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--orange-dark);
+      margin-bottom: 12px;
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec:first-child { margin-top: 0; }
+    .sec::after {
+      content: "";
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--orange-mid), transparent);
+    }
+
+    /* ══════════════════════════════════════════
+       CARD
+    ══════════════════════════════════════════ */
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .card-head {
+      background: var(--orange-lite);
+      border-bottom: 1px solid var(--orange-mid);
+      padding: 10px 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--orange-dark);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .card-body { padding: 18px; }
+
+    /* ══════════════════════════════════════════
+       PHASE TIMELINE
+    ══════════════════════════════════════════ */
+    .phases {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+      gap: 0;
+      padding: 8px 0;
+    }
+    .phase-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      margin-top: 22px;
+      color: var(--orange);
+      font-size: 1.4rem;
+    }
+    .phase {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--orange);
+      border-radius: var(--radius);
+      padding: 16px;
+      position: relative;
+    }
+    .phase-num {
+      position: absolute;
+      top: -14px; left: 16px;
+      background: var(--orange);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .phase-icon { font-size: 1.5rem; margin-bottom: 8px; margin-top: 4px; }
+    .phase-name {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--orange-dark);
+      margin-bottom: 6px;
+    }
+    .phase-desc {
+      font-size: 0.79rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .phase-steps {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .phase-step {
+      font-size: 0.76rem;
+      color: var(--text);
+      padding: 3px 0;
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+    }
+    .phase-step::before {
+      content: "›";
+      color: var(--orange);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       COMMAND BLOCKS
+    ══════════════════════════════════════════ */
+    .cmd-block { margin-bottom: 14px; }
+    .cmd-block:last-child { margin-bottom: 0; }
+    .cmd-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    .cmd {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 5px;
+      padding: 10px 14px;
+      color: var(--text);
+      line-height: 1.65;
+      word-break: break-word;
+    }
+    .cmd .p  { color: var(--orange-dark); user-select: none; font-weight: 700; }
+    .cmd .f  { color: var(--blue); }
+    .cmd .v  { color: var(--green); }
+    .cmd .c  { color: var(--muted2); font-style: italic; }
+    .cmd .kw { color: var(--orange); font-weight: 700; }
+    .cmd-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.5;
+      padding-left: 2px;
+    }
+
+    /* ══════════════════════════════════════════
+       TABLES (shared base)
+    ══════════════════════════════════════════ */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .tbl th {
+      text-align: left;
+      padding: 8px 14px;
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .tbl td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--bg3);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: var(--orange-lite); }
+
+    /* mono cells */
+    .mono { font-family: var(--mono); font-size: 0.78rem; }
+    .flag-col { color: var(--blue); white-space: nowrap; }
+    .val-col  { color: var(--green); }
+    .dim      { color: var(--muted); font-size: 0.75rem; }
+    .tag {
+      display: inline-block;
+      background: var(--orange-lite);
+      color: var(--orange-dark);
+      border: 1px solid var(--orange-mid);
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      white-space: nowrap;
+    }
+    .tag.green { background: var(--green-bg); color: var(--green); border-color: #b2dfc2; }
+    .tag.red   { background: var(--red-bg);   color: var(--red);   border-color: #f5c0bb; }
+    .tag.blue  { background: var(--blue-bg);  color: var(--blue);  border-color: #b8d3f0; }
+    .tag.gray  { background: var(--bg3);      color: var(--muted); border-color: var(--border); }
+
+    /* ══════════════════════════════════════════
+       RISK BADGES
+    ══════════════════════════════════════════ */
+    .risk {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-family: var(--mono);
+    }
+    .risk.H { background: var(--red-bg);    color: var(--red);    border: 1px solid #f5c0bb; }
+    .risk.M { background: var(--yellow-bg); color: var(--yellow); border: 1px solid #f5dcaa; }
+    .risk.L { background: var(--green-bg);  color: var(--green);  border: 1px solid #b2dfc2; }
+
+    /* ══════════════════════════════════════════
+       PORT GRID (risk section)
+    ══════════════════════════════════════════ */
+    .port-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+    }
+    .port-pill {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .port-pill.H { background: var(--red-bg);    color: var(--red);    border-color: #f5c0bb; }
+    .port-pill.M { background: var(--yellow-bg); color: var(--yellow); border-color: #f5dcaa; }
+    .port-pill.L { background: var(--green-bg);  color: var(--green);  border-color: #b2dfc2; }
+
+    /* ══════════════════════════════════════════
+       SCANNED PORTS TABLE
+    ══════════════════════════════════════════ */
+    .ports-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+    }
+    .port-entry {
+      background: var(--bg);
+      padding: 7px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .port-entry:hover { background: var(--orange-lite); }
+    .port-entry .pn { font-weight: 700; color: var(--orange-dark); }
+    .port-entry .ps { color: var(--muted); font-size: 0.68rem; }
+
+    /* ══════════════════════════════════════════
+       FILE TREE
+    ══════════════════════════════════════════ */
+    .tree {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 2;
+      padding: 14px 18px;
+      background: #fafafa;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .tree .dir  { color: var(--orange-dark); font-weight: 700; }
+    .tree .file { color: var(--blue); }
+    .tree .gen  { color: var(--green); }
+    .tree .dim  { color: var(--muted2); }
+    .tree .note { color: var(--muted); font-style: italic; font-family: var(--sans); font-size: 0.72rem; }
+
+    /* ══════════════════════════════════════════
+       TIPS
+    ══════════════════════════════════════════ */
+    .tip {
+      display: flex;
+      gap: 13px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--bg3);
+      align-items: flex-start;
+    }
+    .tip:last-child { border-bottom: none; padding-bottom: 0; }
+    .tip-icon {
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+      width: 24px;
+      text-align: center;
+    }
+    .tip-content {}
+    .tip-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; color: var(--text); }
+    .tip-body  { font-size: 0.81rem; color: var(--muted); line-height: 1.55; }
+    .tip-body code {
+      font-family: var(--mono);
+      font-size: 0.77rem;
+      background: var(--bg3);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--blue);
+    }
+
+    /* ══════════════════════════════════════════
+       MODE COMPARISON TABLE
+    ══════════════════════════════════════════ */
+    .mode-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--orange);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .mode-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange-dark);
+      margin-bottom: 6px;
+    }
+    .mode-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+    .mode-cmd {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 4px;
+      padding: 7px 10px;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .mode-cmd .f { color: var(--blue); }
+    .mode-cmd .v { color: var(--green); }
+    .mode-when {
+      margin-top: 8px;
+      font-size: 0.73rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .mode-when::before { content: "→"; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    .footer {
+      text-align: center;
+      color: var(--muted2);
+      font-size: 0.75rem;
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+    }
+    .footer span { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-logo">🐍</div>
+    <h1>ViperScan <em>/ Cheat Sheet</em></h1>
+  </div>
+  <div class="hero-badges">
+    <span class="badge v">v1.0</span>
+    <span class="badge">Python 3.x</span>
+    <span class="badge">Threaded</span>
+    <span class="badge">Port Scanner</span>
+    <span class="badge">Banner Grabber</span>
+    <span class="badge">Report Generator</span>
+  </div>
+  <div class="hero-desc">
+    ViperScan is a threaded network recon tool — it discovers live hosts, scans 68 common ports in parallel,
+    grabs service banners to identify running software, detects the OS, then generates a full HTML + TXT report.
+    All three phases run automatically in sequence with a single command.
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ══ PHASES ════════════════════════════════════════════════════════ -->
+<div class="sec">Execution Flow</div>
+<div class="card mb">
+  <div class="card-body" style="padding:28px 24px 24px">
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-num">Phase 1</div>
+        <div class="phase-icon">🔍</div>
+        <div class="phase-name">Host Discovery</div>
+        <div class="phase-desc">Builds the target IP list, then scans every IP across 68 common ports using parallel threads.</div>
+        <div class="phase-steps">
+          <div class="phase-step">Resolve domain → IP (if --domain used)</div>
+          <div class="phase-step">Build IP list based on --mode</div>
+          <div class="phase-step">Launch one thread per IP</div>
+          <div class="phase-step">TCP connect_ex() per port (0.5s timeout)</div>
+          <div class="phase-step">Live progress bar updates in real time</div>
+          <div class="phase-step">Save open ports → Json/result.json</div>
+        </div>
+      </div>
+      <div class="phase-arrow">›</div>
+      <div class="phase">
+        <div class="phase-num">Phase 2</div>
+        <div class="phase-icon">🎯</div>
+        <div class="phase-name">Banner Scanning</div>
+        <div class="phase-desc">Connects to each open port and tries a series of protocol probes to pull the service banner.</div>
+        <div class="phase-steps">
+          <div class="phase-step">Load hosts from result.json</div>
+          <div class="phase-step">One thread per host (parallel)</div>
+          <div class="phase-step">Try 15 protocol probes per port</div>
+          <div class="phase-step">Decode banner → detect Service + OS</div>
+          <div class="phase-step">Print result block per host as it finishes</div>
+          <div class="phase-step">Overwrite result.json with enriched data</div>
+        </div>
+      </div>
+      <div class="phase-arrow">›</div>
+      <div class="phase">
+        <div class="phase-num">Phase 3</div>
+        <div class="phase-icon">📊</div>
+        <div class="phase-name">Report Generation</div>
+        <div class="phase-desc">Reads the enriched JSON and produces two timestamped report files in the Report/ folder.</div>
+        <div class="phase-steps">
+          <div class="phase-step">Load enriched result.json</div>
+          <div class="phase-step">Calculate risk per port (HIGH/MEDIUM/LOW)</div>
+          <div class="phase-step">Build stat cards + summary tables</div>
+          <div class="phase-step">Generate report_YYYYMMDD_HHMMSS.txt</div>
+          <div class="phase-step">Generate report_YYYYMMDD_HHMMSS.html</div>
+          <div class="phase-step">Print paths to both files</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCAN MODES ═════════════════════════════════════════════════════ -->
+<div class="sec">Scan Modes</div>
+<div class="grid-3 mb">
+
+  <div class="mode-card">
+    <div class="mode-name">--mode single</div>
+    <div class="mode-desc">Scans exactly one IP address. This is the default if no --mode is given. Best for checking a specific machine.</div>
+    <div class="mode-cmd">
+      python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.5</span>
+    </div>
+    <div class="mode-cmd" style="margin-top:6px">
+      python ViperScan.py <span class="f">--domain</span> <span class="v">example.com</span>
+    </div>
+    <div class="mode-when">Targets: 1 IP, 68 ports = 68 checks</div>
+  </div>
+
+  <div class="mode-card">
+    <div class="mode-name">--mode multi</div>
+    <div class="mode-desc">Scans the entire .0–.254 range of the same /24. Use --start and --end to narrow the range. Good for quick LAN sweeps.</div>
+    <div class="mode-cmd">
+      python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">multi</span>
+    </div>
+    <div class="mode-cmd" style="margin-top:6px">
+      python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">multi</span> <span class="f">--start</span> <span class="v">10</span> <span class="f">--end</span> <span class="v">50</span>
+    </div>
+    <div class="mode-when">Targets: up to 254 IPs × 68 ports = 17,272 checks</div>
+  </div>
+
+  <div class="mode-card">
+    <div class="mode-name">--mode subnet</div>
+    <div class="mode-desc">Uses the subnet calculator to derive the full IP range from a CIDR mask. Requires --subnetmask (8/16/24/32).</div>
+    <div class="mode-cmd">
+      python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">subnet</span> <span class="f">--subnetmask</span> <span class="v">24</span>
+    </div>
+    <div class="mode-cmd" style="margin-top:6px">
+      python ViperScan.py <span class="f">--domain</span> <span class="v">myserver.com</span> <span class="f">--mode</span> <span class="v">subnet</span> <span class="f">--subnetmask</span> <span class="v">24</span>
+    </div>
+    <div class="mode-when">Targets: calculated from mask — see subnet table below</div>
+  </div>
+
+</div>
+
+<!-- ══ COMMANDS + FLAGS ═══════════════════════════════════════════════ -->
+<div class="sec">Commands &amp; Flags</div>
+<div class="grid-2 mb">
+
+  <!-- Commands -->
+  <div class="card">
+    <div class="card-head">🖥 Common Commands</div>
+    <div class="card-body">
+
+      <div class="cmd-block">
+        <div class="cmd-label">Scan a single IP (default mode)</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span></div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Scan a domain name</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--domain</span> <span class="v">example.com</span></div>
+        <div class="cmd-note">Domain is auto-resolved to IP before scanning starts.</div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Scan full /24 subnet</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">subnet</span> <span class="f">--subnetmask</span> <span class="v">24</span></div>
+        <div class="cmd-note">Scans 192.168.1.1 → 192.168.1.254 (254 hosts).</div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Multi mode — full /24 range</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">multi</span></div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Multi mode — custom last-octet range</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--mode</span> <span class="v">multi</span> <span class="f">--start</span> <span class="v">10</span> <span class="f">--end</span> <span class="v">50</span></div>
+        <div class="cmd-note">Scans 192.168.1.10 → 192.168.1.50 only.</div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Faster scan — reduce banner timeout</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">192.168.1.1</span> <span class="f">--timeout</span> <span class="v">2</span></div>
+        <div class="cmd-note">Default is 5s. Use 2s for fast LANs, keep 5s+ for WAN targets.</div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Rebuild report without rescanning</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--report-only</span></div>
+        <div class="cmd-note">Reads the existing Json/result.json and regenerates both report files.</div>
+      </div>
+
+      <div class="cmd-block">
+        <div class="cmd-label">Full example — subnet + custom timeout</div>
+        <div class="cmd"><span class="p">$ </span>python ViperScan.py <span class="f">--ip</span> <span class="v">10.0.0.1</span> <span class="f">--mode</span> <span class="v">subnet</span> <span class="f">--subnetmask</span> <span class="v">24</span> <span class="f">--timeout</span> <span class="v">3</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Flags -->
+  <div class="card">
+    <div class="card-head">🏷 All Flags Reference</div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Flag</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono flag-col">--ip</td>
+          <td><span class="tag blue">str</span></td>
+          <td class="mono val-col">""</td>
+          <td>Target IPv4 address. Use this OR --domain, not both.</td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--domain</td>
+          <td><span class="tag blue">str</span></td>
+          <td class="mono val-col">""</td>
+          <td>Target domain name. Auto-resolved to IP via DNS before scanning.</td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--mode</td>
+          <td><span class="tag blue">str</span></td>
+          <td class="mono val-col">single</td>
+          <td>Scan mode: <span class="tag">single</span> <span class="tag">multi</span> <span class="tag">subnet</span></td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--start</td>
+          <td><span class="tag blue">int</span></td>
+          <td class="mono val-col">0</td>
+          <td>Last-octet start index for <span class="tag">multi</span> mode. E.g. <code style="font-family:var(--mono);color:var(--green)">10</code> → starts at x.x.x.10</td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--end</td>
+          <td><span class="tag blue">int</span></td>
+          <td class="mono val-col">255</td>
+          <td>Last-octet end index for <span class="tag">multi</span> mode. E.g. <code style="font-family:var(--mono);color:var(--green)">50</code> → ends at x.x.x.50</td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--subnetmask</td>
+          <td><span class="tag blue">int</span></td>
+          <td class="mono val-col">—</td>
+          <td>CIDR prefix for <span class="tag">subnet</span> mode. Must be <span class="tag">8</span> <span class="tag">16</span> <span class="tag">24</span> or <span class="tag">32</span></td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--timeout</td>
+          <td><span class="tag blue">int</span></td>
+          <td class="mono val-col">5</td>
+          <td>Seconds to wait per port when grabbing banners in Phase 2.</td>
+        </tr>
+        <tr>
+          <td class="mono flag-col">--report-only</td>
+          <td><span class="tag blue">flag</span></td>
+          <td class="mono val-col">off</td>
+          <td>Skip Phases 1 &amp; 2 entirely. Just regenerate reports from existing JSON.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══ SUBNET + RISK ══════════════════════════════════════════════════ -->
+<div class="sec">Subnet Masks &amp; Risk Classification</div>
+<div class="grid-2 mb">
+
+  <!-- Subnet table -->
+  <div class="card">
+    <div class="card-head">🌐 --subnetmask Reference</div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Mask</th><th>IP Range Scanned</th><th>Total Hosts</th><th>Total Checks</th><th>Use When</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">/32</span></td>
+          <td class="mono">Single host only</td>
+          <td class="mono"><span class="tag green">1</span></td>
+          <td class="mono dim">68</td>
+          <td class="dim">Target is one known IP</td>
+        </tr>
+        <tr>
+          <td><span class="tag">/24</span></td>
+          <td class="mono">x.x.x.1 → x.x.x.254</td>
+          <td class="mono"><span class="tag green">254</span></td>
+          <td class="mono dim">17,272</td>
+          <td class="dim">✅ Standard LAN subnet</td>
+        </tr>
+        <tr>
+          <td><span class="tag">/16</span></td>
+          <td class="mono">x.x.0.1 → x.x.255.254</td>
+          <td class="mono"><span class="tag" style="background:var(--yellow-bg);color:var(--yellow);border-color:#f5dcaa">65,534</span></td>
+          <td class="mono dim">4,456,312</td>
+          <td class="dim">⚠ Slow — internal corp nets only</td>
+        </tr>
+        <tr>
+          <td><span class="tag">/8</span></td>
+          <td class="mono">x.0.0.1 → x.255.255.254</td>
+          <td class="mono"><span class="tag red">16.7M+</span></td>
+          <td class="mono dim">~1.1 billion</td>
+          <td class="dim">🚫 Never on public IPs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Risk classification -->
+  <div class="card">
+    <div class="card-head">⚠ Port Risk Classification</div>
+    <div class="card-body" style="padding:14px 16px">
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span class="risk H">HIGH</span>
+          <span style="font-size:0.78rem;color:var(--muted)">Unencrypted or commonly exploited — review immediately</span>
+        </div>
+        <div class="port-grid">
+          <span class="port-pill H">21 FTP</span>
+          <span class="port-pill H">23 Telnet</span>
+          <span class="port-pill H">445 SMB</span>
+          <span class="port-pill H">2375 Docker</span>
+          <span class="port-pill H">3389 RDP</span>
+          <span class="port-pill H">5900 VNC</span>
+          <span class="port-pill H">5901 VNC</span>
+          <span class="port-pill H">5902 VNC</span>
+          <span class="port-pill H">6379 Redis</span>
+          <span class="port-pill H">11211 Memcached</span>
+          <span class="port-pill H">27017 MongoDB</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span class="risk M">MEDIUM</span>
+          <span style="font-size:0.78rem;color:var(--muted)">Standard services — worth reviewing for exposure</span>
+        </div>
+        <div class="port-grid">
+          <span class="port-pill M">22 SSH</span>
+          <span class="port-pill M">25 SMTP</span>
+          <span class="port-pill M">80 HTTP</span>
+          <span class="port-pill M">110 POP3</span>
+          <span class="port-pill M">143 IMAP</span>
+          <span class="port-pill M">1433 MSSQL</span>
+          <span class="port-pill M">3306 MySQL</span>
+          <span class="port-pill M">5432 PostgreSQL</span>
+          <span class="port-pill M">8080 HTTP-Alt</span>
+          <span class="port-pill M">8443 HTTPS-Alt</span>
+          <span class="port-pill M">9200 Elastic</span>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span class="risk L">LOW</span>
+          <span style="font-size:0.78rem;color:var(--muted)">Generally safe — all remaining open ports</span>
+        </div>
+        <div class="port-grid">
+          <span class="port-pill L">443 HTTPS</span>
+          <span class="port-pill L">53 DNS</span>
+          <span class="port-pill L">123 NTP</span>
+          <span class="port-pill L">993 IMAPS</span>
+          <span class="port-pill L">995 POP3S</span>
+          <span class="port-pill L">…and all others</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ ALL SCANNED PORTS ══════════════════════════════════════════════ -->
+<div class="sec">All 68 Scanned Ports</div>
+<div class="card mb">
+  <div class="card-head">🔌 Complete Port List</div>
+  <div class="card-body" style="padding:14px">
+    <div class="ports-grid">
+      <div class="port-entry"><span class="pn">20</span><span class="ps">FTP Data</span></div>
+      <div class="port-entry"><span class="pn">21</span><span class="ps">FTP Control</span></div>
+      <div class="port-entry"><span class="pn">22</span><span class="ps">SSH</span></div>
+      <div class="port-entry"><span class="pn">23</span><span class="ps">Telnet</span></div>
+      <div class="port-entry"><span class="pn">25</span><span class="ps">SMTP</span></div>
+      <div class="port-entry"><span class="pn">53</span><span class="ps">DNS</span></div>
+      <div class="port-entry"><span class="pn">67</span><span class="ps">DHCP Server</span></div>
+      <div class="port-entry"><span class="pn">68</span><span class="ps">DHCP Client</span></div>
+      <div class="port-entry"><span class="pn">69</span><span class="ps">TFTP</span></div>
+      <div class="port-entry"><span class="pn">80</span><span class="ps">HTTP</span></div>
+      <div class="port-entry"><span class="pn">110</span><span class="ps">POP3</span></div>
+      <div class="port-entry"><span class="pn">123</span><span class="ps">NTP</span></div>
+      <div class="port-entry"><span class="pn">137</span><span class="ps">NetBIOS NS</span></div>
+      <div class="port-entry"><span class="pn">138</span><span class="ps">NetBIOS DG</span></div>
+      <div class="port-entry"><span class="pn">139</span><span class="ps">NetBIOS SS</span></div>
+      <div class="port-entry"><span class="pn">143</span><span class="ps">IMAP</span></div>
+      <div class="port-entry"><span class="pn">161</span><span class="ps">SNMP</span></div>
+      <div class="port-entry"><span class="pn">389</span><span class="ps">LDAP</span></div>
+      <div class="port-entry"><span class="pn">443</span><span class="ps">HTTPS</span></div>
+      <div class="port-entry"><span class="pn">445</span><span class="ps">SMB</span></div>
+      <div class="port-entry"><span class="pn">465</span><span class="ps">SMTPS</span></div>
+      <div class="port-entry"><span class="pn">554</span><span class="ps">RTSP</span></div>
+      <div class="port-entry"><span class="pn">587</span><span class="ps">SMTP Submit</span></div>
+      <div class="port-entry"><span class="pn">636</span><span class="ps">LDAPS</span></div>
+      <div class="port-entry"><span class="pn">993</span><span class="ps">IMAPS</span></div>
+      <div class="port-entry"><span class="pn">995</span><span class="ps">POP3S</span></div>
+      <div class="port-entry"><span class="pn">1433</span><span class="ps">MSSQL</span></div>
+      <div class="port-entry"><span class="pn">1521</span><span class="ps">Oracle DB</span></div>
+      <div class="port-entry"><span class="pn">1935</span><span class="ps">RTMP</span></div>
+      <div class="port-entry"><span class="pn">2049</span><span class="ps">NFS</span></div>
+      <div class="port-entry"><span class="pn">2181</span><span class="ps">Zookeeper</span></div>
+      <div class="port-entry"><span class="pn">2375</span><span class="ps">Docker</span></div>
+      <div class="port-entry"><span class="pn">2376</span><span class="ps">Docker TLS</span></div>
+      <div class="port-entry"><span class="pn">2379</span><span class="ps">etcd</span></div>
+      <div class="port-entry"><span class="pn">2380</span><span class="ps">etcd Peer</span></div>
+      <div class="port-entry"><span class="pn">3000</span><span class="ps">Grafana/Node</span></div>
+      <div class="port-entry"><span class="pn">3306</span><span class="ps">MySQL</span></div>
+      <div class="port-entry"><span class="pn">3389</span><span class="ps">RDP</span></div>
+      <div class="port-entry"><span class="pn">5000</span><span class="ps">Docker Reg</span></div>
+      <div class="port-entry"><span class="pn">5060</span><span class="ps">SIP</span></div>
+      <div class="port-entry"><span class="pn">5061</span><span class="ps">SIP TLS</span></div>
+      <div class="port-entry"><span class="pn">5222</span><span class="ps">XMPP Client</span></div>
+      <div class="port-entry"><span class="pn">5223</span><span class="ps">XMPP SSL</span></div>
+      <div class="port-entry"><span class="pn">5432</span><span class="ps">PostgreSQL</span></div>
+      <div class="port-entry"><span class="pn">5672</span><span class="ps">RabbitMQ</span></div>
+      <div class="port-entry"><span class="pn">5900</span><span class="ps">VNC</span></div>
+      <div class="port-entry"><span class="pn">5901</span><span class="ps">VNC-1</span></div>
+      <div class="port-entry"><span class="pn">5902</span><span class="ps">VNC-2</span></div>
+      <div class="port-entry"><span class="pn">5984</span><span class="ps">CouchDB</span></div>
+      <div class="port-entry"><span class="pn">6379</span><span class="ps">Redis</span></div>
+      <div class="port-entry"><span class="pn">6443</span><span class="ps">K8s API</span></div>
+      <div class="port-entry"><span class="pn">8000</span><span class="ps">Django/HTTP</span></div>
+      <div class="port-entry"><span class="pn">8080</span><span class="ps">HTTP Alt</span></div>
+      <div class="port-entry"><span class="pn">8081</span><span class="ps">Nexus</span></div>
+      <div class="port-entry"><span class="pn">8082</span><span class="ps">Artifactory</span></div>
+      <div class="port-entry"><span class="pn">8086</span><span class="ps">InfluxDB</span></div>
+      <div class="port-entry"><span class="pn">8443</span><span class="ps">HTTPS Alt</span></div>
+      <div class="port-entry"><span class="pn">8888</span><span class="ps">Jupyter</span></div>
+      <div class="port-entry"><span class="pn">9000</span><span class="ps">SonarQube</span></div>
+      <div class="port-entry"><span class="pn">9042</span><span class="ps">Cassandra</span></div>
+      <div class="port-entry"><span class="pn">9090</span><span class="ps">Prometheus</span></div>
+      <div class="port-entry"><span class="pn">9092</span><span class="ps">Kafka</span></div>
+      <div class="port-entry"><span class="pn">9200</span><span class="ps">Elasticsearch</span></div>
+      <div class="port-entry"><span class="pn">9300</span><span class="ps">Elastic Node</span></div>
+      <div class="port-entry"><span class="pn">10250</span><span class="ps">Kubelet API</span></div>
+      <div class="port-entry"><span class="pn">11211</span><span class="ps">Memcached</span></div>
+      <div class="port-entry"><span class="pn">15672</span><span class="ps">RabbitMQ Mgmt</span></div>
+      <div class="port-entry"><span class="pn">27017</span><span class="ps">MongoDB</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FILE STRUCTURE + OUTPUT ════════════════════════════════════════ -->
+<div class="sec">Project Structure &amp; Output Files</div>
+<div class="grid-2 mb">
+
+  <div class="card">
+    <div class="card-head">📁 Project File Structure</div>
+    <div class="card-body">
+      <div class="tree">
+        <div><span class="dir">ViperScan/</span></div>
+        <div>&nbsp;&nbsp;├── <span class="file">ViperScan.py</span> &nbsp;<span class="note">← entry point, run this</span></div>
+        <div>&nbsp;&nbsp;├── <span class="dir">Modules/</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">__init__.py</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">Host_Discovery.py</span> &nbsp;<span class="note">← Phase 1</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">Banner_Scanner.py</span> &nbsp;<span class="note">← Phase 2</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">Report.py</span> &nbsp;<span class="note">← Phase 3</span></div>
+        <div>&nbsp;&nbsp;├── <span class="dir">Json/</span> &nbsp;<span class="note">← auto-created</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="gen">result.json</span> &nbsp;<span class="note">← scan data</span></div>
+        <div>&nbsp;&nbsp;└── <span class="dir">Report/</span> &nbsp;<span class="note">← auto-created</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── <span class="gen">report_TIMESTAMP.html</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── <span class="gen">report_TIMESTAMP.txt</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">📄 Output File Details</div>
+    <table class="tbl">
+      <thead>
+        <tr><th>File</th><th>Created By</th><th>Contains</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono" style="color:var(--orange-dark);font-size:.75rem">Json/result.json</td>
+          <td><span class="tag">Phase 1</span> → updated <span class="tag">Phase 2</span></td>
+          <td class="dim">IP list with open ports (Phase 1), enriched with banners, service, OS (Phase 2)</td>
+        </tr>
+        <tr>
+          <td class="mono" style="color:var(--blue);font-size:.75rem">report_*.html</td>
+          <td><span class="tag">Phase 3</span></td>
+          <td class="dim">Full ViperScan dashboard — stat cards, summary tables, risk badges, per-host port details</td>
+        </tr>
+        <tr>
+          <td class="mono" style="color:var(--blue);font-size:.75rem">report_*.txt</td>
+          <td><span class="tag">Phase 3</span></td>
+          <td class="dim">Plain-text version of the report — for terminals, logs, emails, archives</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══ TIPS ══════════════════════════════════════════════════════════ -->
+<div class="sec">Tips, Tricks &amp; Known Behaviours</div>
+<div class="card mb">
+  <div class="card-body">
+
+    <div class="tip">
+      <div class="tip-icon">⚡</div>
+      <div class="tip-content">
+        <div class="tip-title">Threading makes it fast</div>
+        <div class="tip-body">Every IP runs in its own thread during Phase 1 — all ports on all IPs are checked simultaneously. A /24 scan (254 hosts × 68 ports = 17,272 checks) typically completes in under 30 seconds on a local network. Phase 2 also threads one thread per host.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">📊</div>
+      <div class="tip-content">
+        <div class="tip-title">Progress bar during Phase 1</div>
+        <div class="tip-body">Instead of printing one line per port (which floods the terminal), Phase 1 shows a single live-updating progress bar: <code>[=============>      ] 68%  |  4,624/6,800 checks  |  3 host(s) found</code>. After scanning finishes, a clean summary table is printed.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🕐</div>
+      <div class="tip-content">
+        <div class="tip-title">Timeout tuning</div>
+        <div class="tip-body">Phase 1 uses a hardcoded <code>0.5s</code> socket timeout per port (fast). Phase 2 uses <code>--timeout</code> (default <code>5s</code>) for banner grabbing. For LAN targets try <code>--timeout 2</code>. For slow or remote WAN hosts keep it at <code>5</code> or higher to avoid missed banners.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🌐</div>
+      <div class="tip-content">
+        <div class="tip-title">Cloudflare &amp; reverse proxies</div>
+        <div class="tip-body">If banners return <code>Server: cloudflare</code> or <code>Proxy-Status: Cloudflare-Proxy</code>, the real origin server is hidden. OS will show as <code>Unknown</code> — this is expected and correct behaviour. The scan is hitting the CDN edge, not the actual host.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🔁</div>
+      <div class="tip-content">
+        <div class="tip-title">--report-only workflow</div>
+        <div class="tip-body">If you already ran a scan, you can edit <code>Report.py</code> (change colours, add fields, tweak layout) and run <code>python ViperScan.py --report-only</code> to regenerate both report files instantly without rescanning. The JSON data is preserved between runs.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🎯</div>
+      <div class="tip-content">
+        <div class="tip-title">Banner probe order</div>
+        <div class="tip-body">Phase 2 tries 15 protocol commands per port in order: listen first, then HTTP GET, HTTP HEAD, HTTP/1.1, FTP QUIT, FTP USER, FTP SYST, FTP LIST, SMTP HELP, SMTP AUTH, SMTP NOOP, generic VERSION, SSH handshake, IMAP AUTH, IMAP CAPABILITY. It stops at the first response that returns data.</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🔒</div>
+      <div class="tip-content">
+        <div class="tip-title">Legal reminder</div>
+        <div class="tip-body">Only scan networks and IP ranges you own or have explicit written permission to test. Unauthorized port scanning is illegal in most countries and may violate ISP terms of service. Never run /8 or /16 scans against public internet IPs.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <span>🐍 ViperScan</span> &mdash; Network Recon Tool &mdash; Cheat Sheet v1.0
+</div>
+
+</div><!-- /page -->
+</body>
+</html>
